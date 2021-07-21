@@ -1,0 +1,134 @@
+    # Project definitions (do not edit)
+Task: Horses
+scorer: Byron
+date: May8
+multianimalproject:
+
+    # Project path (change when moving around)
+project_path: Horses-Byron-2019-05-08
+
+    # Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  /videos/BrownHorseintoshadow.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Brownhorselight.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Brownhorseoutofshadow.mp4:
+    crop: 0, 288, 0, 162
+  /videos/ChestnutHorseLight.mp4:
+    crop: 0, 576, 0, 324
+  /videos/Chestnuthorseongrass.mp4:
+    crop: 0, 288, 0, 162
+  /videos/GreyHorseLightandShadow.mp4:
+    crop: 0, 288, 0, 162
+  /videos/GreyHorseNoShadowBadLight.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample1.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample10.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample11.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample12.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample13.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample14.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample15.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample16.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample17.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample18.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample19.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample2.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample20.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample3.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample4.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample5.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample6.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample7.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample8.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Sample9.mp4:
+    crop: 0, 288, 0, 162
+  /videos/TwoHorsesinvideobothmoving.mp4:
+    crop: 0, 288, 0, 162
+  /videos/Twohorsesinvideoonemoving.mp4:
+    crop: 0, 288, 0, 162
+  /videos/BrownHorseinShadow.MP4:
+    crop: 0, 1920, 0, 1080
+bodyparts:
+- Nose
+- Eye
+- Nearknee
+- Nearfrontfetlock
+- Nearfrontfoot
+- Offknee
+- Offfrontfetlock
+- Offfrontfoot
+- Shoulder
+- Midshoulder
+- Elbow
+- Girth
+- Wither
+- Nearhindhock
+- Nearhindfetlock
+- Nearhindfoot
+- Hip
+- Stifle
+- Offhindhock
+- Offhindfetlock
+- Offhindfoot
+- Ischium
+start: 0
+stop: 1
+numframes2pick: 20
+
+    # Plotting configuration
+skeleton: []
+skeleton_color: black
+pcutoff: 0.1
+dotsize: 12
+alphavalue: 0.7
+colormap: jet
+
+    # Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.05
+- 0.1
+- 0.2
+- 0.5
+- 0.9
+iteration: 0
+default_net_type:
+default_augmenter:
+snapshotindex: all
+batch_size: 4
+
+    # Cropping Parameters (for analysis and outlier frame detection)
+cropping: false
+croppedtraining:
+    #if cropping is true for analysis, then set the values here:
+x1: 0
+x2: 640
+y1: 277
+y2: 624
+
+    # Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2:
+- 50
+- 50
+move2corner: true
+resnet: 50
