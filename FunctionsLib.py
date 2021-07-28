@@ -1,10 +1,17 @@
 import pandas as pd
 import numpy as np
 import random
+import re
 import deeplabcut
 import math
 from IPython.display import Image, display
 
+
+
+# add noise (small change, to compare to big change in corruption_data)
+def add_noise(original,scorer,bodyparts,list_i,n):
+    
+    
 
 # corrupting data from a csv deeplabcut file
 def corruption_data(original,scorer,bodyparts,list_i,n):
@@ -15,8 +22,8 @@ def corruption_data(original,scorer,bodyparts,list_i,n):
 
     for name in corrupted_frames:
         for i in list_i:
-            df.loc[name][(scorer,bodyparts[i], 'x')] = np.random.uniform(5,200)
-            df.loc[name][(scorer,bodyparts[i], 'y')] = np.random.uniform(5,100)
+            df.loc[name][(scorer,bodyparts[i], 'x')] = np.random.uniform(5,500)
+            df.loc[name][(scorer,bodyparts[i], 'y')] = np.random.uniform(5,500)
             
     return df,corrupted_frames
 
@@ -64,3 +71,12 @@ def clean_dataset(df):
     df.dropna(inplace=True)
     indices_to_keep = ~df.isin([np.nan, np.inf, -np.inf]).any(1)
     return df[indices_to_keep].astype(np.float64)
+
+
+def display_frames(images,path_images):
+    for i in images:
+        string = "".join(re.findall(r'\d',i))
+        id = string[2:]
+        print(id)
+        display(Image(filename=f'{path_images}'+id+'_bodypart.png'))
+        
