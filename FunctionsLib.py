@@ -5,14 +5,7 @@ import re
 import deeplabcut
 import math
 from IPython.display import Image, display
-
-
-
-# add noise (small change, to compare to big change in corruption_data)
-def add_noise(original,scorer,bodyparts,list_i,n):
     
-    
-
 # corrupting data from a csv deeplabcut file
 def corruption_data(original,scorer,bodyparts,list_i,n):
     df = pd.read_csv(original,header=[0,1,2],index_col=0)
@@ -80,3 +73,52 @@ def display_frames(images,path_images):
         print(id)
         display(Image(filename=f'{path_images}'+id+'_bodypart.png'))
         
+        
+        
+# https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_digits.html#sphx-glr-auto-examples-cluster-plot-kmeans-digits-py        
+def bench_k_means(kmeans, name, data, labels):
+    """Benchmark to evaluate the KMeans initialization methods.
+
+    Parameters
+    ----------
+    kmeans : KMeans instance
+        A :class:`~sklearn.cluster.KMeans` instance with the initialization
+        already set.
+    name : str
+        Name given to the strategy. It will be used to show the results in a
+        table.
+    data : ndarray of shape (n_samples, n_features)
+        The data to cluster.
+    labels : ndarray of shape (n_samples,)
+        The labels used to compute the clustering metrics which requires some
+        supervision.
+    """
+    t0 = time()
+    estimator = make_pipeline(StandardScaler(), kmeans).fit(data)
+    fit_time = time() - t0
+    results = [name, fit_time, estimator[-1].inertia_]
+
+    # Define the metrics which require only the true labels and estimator
+    # labels
+    clustering_metrics = [
+        metrics.homogeneity_score,
+        metrics.completeness_score,
+        metrics.v_measure_score,
+        metrics.adjusted_rand_score,
+        metrics.adjusted_mutual_info_score,
+    ]
+    results += [m(labels, estimator[-1].labels_) for m in clustering_metrics]
+
+    # The silhouette score requires the full dataset
+    results += [
+        metrics.silhouette_score(data, estimator[-1].labels_,
+                                 metric="euclidean", sample_size=300,)
+    ]
+
+    # Show the results
+    formatter_result = ("{:9s}\t{:.3f}s\t{:.0f}\t{:.3f}\t{:.3f}"
+                        "\t{:.3f}\t{:.3f}\t{:.3f}\t{:.3f}")
+    print(formatter_result.format(*results))
+    
+    
+    
